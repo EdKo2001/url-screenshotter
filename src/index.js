@@ -14,7 +14,7 @@ const urlList = [
 
 (async () => {
   // Check if the 'images' folder exists, create it if not
-  const imagesFolderPath = path.join(__dirname, "images");
+  const imagesFolderPath = path.join(__dirname, "../images");
   if (!fs.existsSync(imagesFolderPath)) {
     fs.mkdirSync(imagesFolderPath);
     console.log("Created 'images' folder.");
@@ -84,13 +84,16 @@ const urlList = [
 
       // Generate a filename based on the post date
       const postDate = urlData.post_date.split(" ")[0];
-      let screenshotPath = path.join("images", `${postDate}.jpg`);
+      let screenshotPath = path.join(imagesFolderPath, `${postDate}.jpg`);
 
       // Check if the file already exists
       let counter = 1;
       while (fs.existsSync(screenshotPath)) {
         // Append a counter to the filename to ensure uniqueness
-        screenshotPath = path.join("images", `${postDate} (${counter}).jpg`);
+        screenshotPath = path.join(
+          imagesFolderPath,
+          `${postDate} (${counter}).jpg`
+        );
         counter++;
       }
 
